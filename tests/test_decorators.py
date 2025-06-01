@@ -36,7 +36,6 @@ def test_decorator_cupsys_error(capsys: Any) -> Any:
 
 def test_decorator_cupsys_positive(capsys: Any) -> Any:
     """Тестирование декоратора с выходом ошибки с 'cupsys'"""
-    with pytest.raises(Exception):
-        my_function(6, 3)
-        captured = capsys.readouterr()
-        assert "error" in captured.out
+    my_function(6, 3)
+    captured = capsys.readouterr()
+    assert "ok" in captured.out
