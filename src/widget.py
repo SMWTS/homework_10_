@@ -1,28 +1,28 @@
 from datetime import datetime
 
-from src.masks import get_mask_account, get_mask_card_number
 
+def mask_account_card(account_or_card: str) -> str:
+    """Функция принимает тип и номер карты или счета и возвращает строку с замаскированным номером"""
+    account_or_card_split = account_or_card.split()
 
-def mask_account_card(string: str) -> tuple[str, str]:
-    """Функция маскировки цифр карты и счета"""
-    string_split = string.split()
-    name_card_or_score = " ".join(string_split[:2])
-    number_card_or_score = string_split[-1]
-
-    return name_card_or_score, number_card_or_score
-
-#тест для поверки работы функции маскировки карт
-test_card = "Visa Platinum 7000792289606361"
-name_card, card_number = mask_account_card(test_card)
-masked_number = get_mask_card_number(card_number)
-print(f"{name_card} {masked_number}")
-
-
-#тест для проверки работы функции маскировки счета
-test_check = "Счет 35383033474447895560"
-name_check, check_number = mask_account_card(test_check)
-masked_check = get_mask_account(test_check)
-print(f"Счет **{masked_check}")
+    if "Счет" in account_or_card:
+        if len(account_or_card_split[-1]) != 20:
+            return "Введен неверный номер счета"
+        elif len(account_or_card) == " ":
+            return "Пустая строка. Введите номер карты или счета"
+        else:
+            number_mask = "**" + account_or_card[-4:]
+            return f"Счет {number_mask}"
+    else:
+        if len(account_or_card_split[-1]) != 16:
+            return "Введен неверный номер карты"
+        elif len(account_or_card) == " ":
+            return "Пустая строка. Введите номер карты или счета"
+        else:
+            card_type_sep = " ".join(account_or_card_split[:-1])
+            card_number_sep = account_or_card_split[-1]
+            number_mask = "" + card_number_sep[0:4] + " " + card_number_sep[4:6] + "** **** " + card_number_sep[-4:]
+            return f"{card_type_sep} {number_mask}"
 
 
 def get_date(date: str) -> str:
@@ -31,6 +31,3 @@ def get_date(date: str) -> str:
     date_obj = datetime.fromisoformat(date)
     formatted_date = date_obj.strftime("%d.%m.%Y")
     return formatted_date
-
-
-print(get_date("2024-03-11T02:26:18.671407"))
