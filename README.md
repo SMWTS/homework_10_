@@ -17,3 +17,4 @@ pip install -r requirements.txt
 ## Тесты:
 Добалены тесты маскировки номеров карт и счетов, сортировки по дате и фильтра транзакций.
 Проведены тесты корректной работы функций "card_number_generator", "transaction_descriptions", "filter_by_currency" и модуля "decorators".
+
