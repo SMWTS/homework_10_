@@ -1,10 +1,11 @@
-from typing import Any, Callable, Union
+from typing import Any, Callable
 
 
-def log(filename=None):
+def log(filename: Any =None) -> Callable[[Callable[..., Any]], Any]:
     """Декоратор для логирования функций и вывода результатов в консоль или файл"""
+
     def wrapper(fnc: Callable) -> Any:
-        def inner(*args, **kwargs) -> Any:
+        def inner(*args: Any, **kwargs: Any) -> Any:
             try:
                 result = fnc(*args, **kwargs)
                 if filename:
@@ -23,4 +24,5 @@ def log(filename=None):
                 raise Exception("Деление на ноль невозможно")
 
         return inner
+
     return wrapper
