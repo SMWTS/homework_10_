@@ -16,6 +16,8 @@ mypy = "==1.16.0"
 coverage = "==7.9.0"
 pytest = "==8.4.0"
 typing-extensions = "==4.14.0"
+pandas = "^2.3.0"
+openpyxl = "^3.1.5"
 
 
 [tool.poetry.group.lint.dependencies]
