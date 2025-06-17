@@ -1,4 +1,5 @@
 import csv
+from typing import Any, Hashable
 
 import pandas as pd
 
@@ -29,11 +30,12 @@ if __name__ == "__main__":
     print(transact_new)
 
 
-def get_read_xlsx(path: str) -> None:
+def get_read_xlsx(path: str) -> list[dict[Hashable, Any]]:
     """Функция принимает файл Excel и возвращает список словарей"""
-    excel_data = pd.read_excel(path)
-    my_dict = excel_data.to_dict(orient = "records")
-    print(my_dict)
+    with open(path, encoding="utf-8") as file:
+        excel_data = pd.read_excel(path)
+        my_dict = excel_data.to_dict(orient = "records")
+    return my_dict
 
 
 if __name__ == "__main__":
