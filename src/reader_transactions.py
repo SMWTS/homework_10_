@@ -25,18 +25,9 @@ def get_read_csv(path: str) -> list[dict]:
     return csv_list
 
 
-if __name__ == "__main__":
-    transact_new = get_read_csv("..\\data\\transactions.csv")
-    print(transact_new)
-
-
 def get_read_xlsx(path: str) -> list[dict[Hashable, Any]]:
     """Функция принимает файл Excel и возвращает список словарей"""
-    with open(path, encoding="utf-8") as file:
+    with open(path, encoding="utf-8") as my_dict:
         excel_data = pd.read_excel(path)
-        my_dict = excel_data.to_dict(orient = "records")
+        my_dict = excel_data.to_dict(orient="records")
     return my_dict
-
-
-if __name__ == "__main__":
-    get_read_xlsx("..\\data\\transactions_excel.xlsx")
