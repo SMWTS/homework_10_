@@ -23,11 +23,11 @@ def test_get_transactions(mock_load=Any, transact=None) -> Any:
     operation_amount = transact.get("operationAmount")
     if operation_amount is not None:
         amount = float(operation_amount.get("amount"))
-        return amount
+        assert amount
     else:
         mock_load.return_value = [{"test": "test"}]
         assert get_transactions(mock_load) == [{"test": "test"}]
-        return mock_load.assert_called()
+        assert mock_load.assert_called()
 
 
 @patch("requests.request")

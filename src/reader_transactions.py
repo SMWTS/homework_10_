@@ -31,3 +31,19 @@ def get_read_xlsx(path: str) -> list[dict[Hashable, Any]]:
         excel_data = pd.read_excel(path)
         my_dict = excel_data.to_dict(orient="records")
     return my_dict
+
+import json
+
+
+def load_json(file_path: str) -> list:
+    with open(file_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+def load_csv(file_path: str) -> list:
+    with open(file_path, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        return list(reader)
+
+def load_xlsx(file_path: str) -> list:
+    df = pd.read_excel(file_path)
+    return df.to_dict(orient='records')
